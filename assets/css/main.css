@@ -1,0 +1,214 @@
+body{
+    background-color: #D9D9D9;
+    box-sizing: border-box;
+    height: 100vh;
+}
+
+
+
+
+.account{
+    background-color: #D9D9D9 !important;
+    color:#000000;
+    font-weight: 800;
+    border:0;
+    outline: 0;
+}
+
+.account:hover{
+    color: purple !important;
+}
+
+
+.search__input{
+    background-color: #D9D9D9;
+}
+
+.text_container{
+    background-color: #EBF0F0;
+}
+
+
+.h1_welcome_title{
+    font-size: 40px;
+    font-weight: 800;
+}
+
+.welcome__message{
+    font-size: 27px;
+    font-weight: bold;
+}
+
+
+.my_footer{
+    height: 70px;
+}
+
+.footer_text{
+    color: #8936BB;
+    font-weight: bold;
+}
+
+.footer_developer{
+    font-size: 13px;
+    color: #D9D9D9;
+}
+
+
+
+/* How it works Section */
+.how_it_works_section{
+    height:350px;
+}
+
+.inner__how_it_works_section{
+    height: 350px;
+}
+
+
+.inner__how_it_works-metrics{
+    background-color: #D9D9D9 !important;
+    height: 250px;
+}
+
+
+.cirle_container{
+    width: 200px;
+    height: 200px;
+    flex-direction: column;
+}
+
+
+.metric{
+   height :100px;
+   width: 100px;
+   border-radius: 50%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.inner__metric{
+    height :70px;
+    width: 70px;
+    border-radius: 50%;
+    background-color: #fff;
+    position:relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.inner__metric h1{
+    font-size: 18px;
+}
+
+.student_metric{
+    background-color: #8016B2;
+}
+.question_metric{
+    background-color: #C66ACE;
+}
+.answer_metric{
+    background-color: #313FB8;
+}
+
+
+
+/* How it works Left  */
+
+.how_it_works{
+    font-size: 40px;
+    color: #000000;
+    font-weight: bold;
+}
+
+.how_it_works_div ul { 
+   font-size: 20px;
+   font-weight: bold;
+   list-style-type: none; 
+}
+
+.how_it_works_di ul li {  
+    font-size: 18px;
+  }
+
+.how_it_works_div ul li::before{ 
+   /* content: "•"; */
+   background-color:#8016B2; 
+   font-weight: bold;
+   border-radius: 50%;
+   content: "";
+   display: inline-block;
+   margin-right: 10px;
+   margin-bottom: 2px;
+   height: 10px;
+   width: 10px;
+}
+
+
+
+/* Create account Styles */
+.img_container{
+    background-image: url('../img/side_mage.jpg');
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+    width:100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.form_container{
+    height: 100%;
+    width:100%; 
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0;
+}
+
+.create__account{
+    width:70%;
+    height: 350px;
+}
+
+.create__account h1{
+    font-size: 50px;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+.create__account input{
+    border-radius: 0 !important;
+    outline: 0 !important;
+    border: 0 !important;
+    padding: 40px !important;
+    color: #8936BB !important;
+}
+
+.create__account .btn-primary{
+    background-color: #8016B2 !important;
+    color: #fff;
+    font-weight: bold; 
+    border: 0 !important;
+    padding: 20px !important;
+}
+
+.form_container a{
+    color: #8016B2 !important;
+    font-size: 18px;
+}
+
+.form_container .have_account{
+    font-weight: bold;
+    font-size: 18px;
+}
+
