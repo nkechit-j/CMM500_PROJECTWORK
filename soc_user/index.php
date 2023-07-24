@@ -10,6 +10,8 @@
 <!-- Include Bootstrap Icon CDN -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
+<link href="https://unpkg.com/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
+    
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
 <!-- custom CSS -->
@@ -55,7 +57,7 @@
      
 
 
-    <div class="row">
+    <div class="row q_section">
         <div class="col-md-4 col-md question__list">
                <div class="inner_questions_list mx-2">
 
@@ -201,16 +203,44 @@
 
 
     <!-- off canvas for Asking Questions -->
-      <div class="offcanvas offcanvas-end" data-bs-backdrop="static" tabindex="-1" id="Questions" aria-labelledby="staticBackdropLabel">
+    <div class="offcanvas offcanvas-end w-50 bg-grey" data-bs-backdrop="static" tabindex="-1" id="Questions" aria-labelledby="staticBackdropLabel">
         <div class="offcanvas-header">
-          <h5 class="offcanvas-title" id="staticBackdropLabel">Offcanvas</h5>
+          <h5 class="offcanvas-title" id="staticBackdropLabel">Asking Question</h5>
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        <div class="offcanvas-body">
-          <div>
-            I will not close if you click outside of me.
-          </div>
-        </div>
+          <div class="offcanvas-body p-0 bg-light">
+            <div class="row">
+            <div class="col-md-12 form_con">
+                    <div class="form_container"> 
+                        <form action="" class="container my-4 question_form">  
+
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control w-100" id="title" name="title" placeholder="title">
+                                <label for="title">Title</label>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <textarea class="form-control h-50" rows="10" placeholder="type your question here" id="ques" name="question"></textarea>
+                                <label for="ques">Question</label>
+                            </div>
+
+                            <div class="form-row mb-3">
+                                <input type="text" class="form-control w-100 p-2" id="tags" name="tags" placeholder="Choose tags">
+                                <!-- <label for="tags">Tags</label> -->
+                            </div>
+
+
+                            <div class="form-floating"> 
+                                    <button type="submit" class="btn btn-primary w-100">Submit Question</button>
+                            </div>                         
+
+                        </form>
+
+                    </div>
+
+                    </div>
+            </div>
+            </div>
       </div>
 
 
@@ -223,6 +253,30 @@
             </p>
         </div>
     </div>
+
+    <script src="https://unpkg.com/@yaireo/tagify"></script>
+    <script src="https://unpkg.com/@yaireo/tagify@3.1.0/dist/tagify.polyfills.min.js"></script>
+    <script>
+       // The DOM element you wish to replace with Tagify
+        var input = document.querySelector('input[name=tags]');
+        // initialize Tagify on the above input node reference
+        new Tagify(input,{
+                whitelist: ["Python", "Java", "Database","JS","SQL"],
+                dropdown: {
+                    position: "input",
+                    enabled : 0 // always opens dropdown when input gets focus
+                }
+             });
+
+
+    const form = document.querySelector('form.question_form');
+    form.addEventListener('submit', function(evt){
+        evt.preventDefault();
+        console.log(input.value);
+
+    });
+
+  </script>
 
     <script src="../assets/js/main.js"></script>
 </body>
