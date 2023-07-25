@@ -34,12 +34,12 @@
                 <form action="" class="container create__account">  
 
                       <div class="form-floating mb-3">
-                        <input type="text" class="form-control form-control-lg" id="username" placeholder="student username">
+                        <input type="text" class="form-control form-control-lg" id="username"  name="username" placeholder="student Email/username">
                         <label for="username">Username/Email</label>
                       </div>
 
                       <div class="form-floating mb-3">
-                        <input type="password" class="form-control form-control-lg" id="password1" placeholder="Choose Password">
+                        <input type="password" class="form-control form-control-lg" id="password1" name="password1" placeholder="Choose Password">
                         <label for="password1">Password</label>
                       </div>
  
@@ -47,11 +47,10 @@
                       <div class="form-floating"> 
                             <button type="submit" class="btn btn-primary btn-lg w-100">Login</button>
                       </div>
+                       <div class="response_message"></div>
                       <p class="d-flex justify-content-between">
                         <span class="have_account">Don't have an acccount yet ? </span> 
-                        <a href="../create-account/">Create An Account</a>
-
-                        <a href="../forgot-password/">Forgot Password ?</a>
+                        <a href="../create-account/">Create An Account</a>   <a href="../forgot-password/">Forgot Password ?</a>
                       </p>
 
                       
@@ -64,6 +63,49 @@
 
     </div>
 
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+
+    <script>
+
+      $(document).ready(function(){
+         let result = $(".response_message");
+         $(document).on("submit", ".create__account",function(evt){
+              evt.preventDefault();
+                          let formData = $(this).serialize(); 
+                          console.log(formData);
+
+                          $.ajax({
+                              url:"../api/auth/login.php",
+                              method:"post", 
+                              data: formData, 
+                              beforeSend:()=>{
+                                result.html('<div class="text-center"><div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div></div>');
+                                $(this).find('button[type=submit]').prop('disabled', true); 
+                              },
+                              success: (res,status)=>{
+                                console.log(res);
+                                let r = JSON.parse(res);
+                                  if(r.msg =='success'){
+                                    result.html('<div class ="alert alert-success"> Successful! </div>');
+                                    setTimeout(function(event){ window.location.href="../"; },3000);
+                                    localStorage.setItem("ACTIVE_USER",r.user);
+                                  }else{ 
+                                    result.html('<div class ="alert alert-danger">'+r.msg+'</div>'); 
+                                    $(this).find('button[type=submit]').prop('disabled', false); 
+                                }
+                          },
+                          error: function(error) { 
+                              console.log(error); 
+                        }
+                  });
+              }
+          );
+             
+
+      });
+    
+    </script>
     
 </body>
 </html>

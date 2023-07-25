@@ -16,6 +16,26 @@ trait Common{
     public function cleanInput($input){
         return trim( stripslashes( htmlspecialchars( $input) ) );
     }
+
+    public function exists($val,$table,$col){
+        $con     = $this->con();
+        if(!empty($val)){
+        $sql       = "SELECT * FROM `".$table."` WHERE `".$col."`=?";
+        $stmt      = $con->prepare($sql);
+        $stmt->bind_param("s",$val);
+        $exec      = $stmt->execute();
+        if($exec){
+        $result   = $stmt->get_result();
+        $num_rows = $result->num_rows;
+        if($num_rows>0){
+            return true;
+        }else{
+            return false;
+        }
+        //   $stmt->close();
+        }
+      }
+    }
   
 }
 

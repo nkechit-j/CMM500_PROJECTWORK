@@ -1,3 +1,7 @@
+<?php
+   session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,11 +38,15 @@
                   </div>
               </li> 
             </ul>
-              <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+
+
+            <?php  if( !isset($_SESSION['_USER_EMAIL']) ){?>
+              <div class="btn-group auth" role="group" aria-label="Button group with nested dropdown">
                 <a href ="./create-account/" type="button" class="btn btn-primary btn-lg mx-2 create_account account">Create Account</a>
                 <a href ="./login/" type="button" class="btn btn-primary btn-lg login account">Login</a> 
               </div>
- 
+              <?php  } ?>
+   
               <div class="dropdown">
                 <i class="bi bi-list fs-1" type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
                 <ul class="dropdown-menu dropdown-menu-dark">
@@ -54,35 +62,43 @@
         </div>
       </nav>
 
+<!--  show this section when the iser os logged in  -->
+      <div class="home_to_auth_section">
 
+        
      <div class="row">
-        <div class="col-md-12 col-md text_container top d-flex justify-content-center align-items-center">
+      <div class="col-md-12 col-md text_container top d-flex justify-content-center align-items-center">
 
-            <div class="inner__container m-4 pt-4">
-                   <h1 class="h1 h1_welcome_title"> Welcome To BrainShare</h1>
-                   <p class="welcome__message p-4">
-                       BrainShare is an SOC online Q&A <br/>  platform for knowlegde-sharing.
-                   </p>
-            </div>
+          <div class="inner__container m-4 pt-4">
+                 <h1 class="h1 h1_welcome_title"> Welcome To BrainShare</h1>
+                 <p class="welcome__message p-4">
+                     BrainShare is an SOC online Q&A <br/>  platform for knowlegde-sharing.
+                 </p>
+          </div>
 
-        </div>
+      </div>
 
-        <!-- Call to ACTION --> 
+      <!-- Call to ACTION --> 
 
-        <div class="col-md-12 col-md text_container top2 d-flex justify-content-center align-items-center">
-            <div class="inner__container m-4 pt-4">
-                <a href="./soc_user/" class="btn btn-primary btn-lg w-100 mx-4">
-                        <h1> Ask a Question</h1>
-                </a>
-            </div>
-        </div>
+              <div class="col-md-12 col-md text_container top2 d-flex justify-content-center align-items-center">
+                  <div class="inner__container m-4 pt-4">
+                      <a href="./soc_user/" class="btn btn-primary btn-lg w-100 mx-4">
+                              <h1> Ask a Question</h1>
+                      </a>
+                  </div>
+              </div>
 
-     </div> 
+          </div> 
 
+
+      </div>
      
 
+      <?php  if( !isset($_SESSION['_USER_EMAIL']) ){?>
 
-    <div class="row">
+     <div class="home_default">
+
+      <div class="row">
         <div class="col-md-6 col-md image__slide_container">
             <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
@@ -166,6 +182,11 @@
         </div>
         
     </div>
+
+
+     </div>
+
+     <?php  } ?>
 
 
 

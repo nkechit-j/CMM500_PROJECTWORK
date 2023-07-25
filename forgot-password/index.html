@@ -34,9 +34,11 @@
                 <form action="" class="container create__account">  
 
                       <div class="form-floating mb-3">
-                        <input type="email" class="form-control form-control-lg" id="student_email" placeholder="student email">
+                        <input type="email" class="form-control form-control-lg" id="student_email" name="student_email"  placeholder="student email">
                         <label for="student_email">Email</label>
                       </div> 
+
+                      <div class="response_message"></div>
 
                       <div class="form-floating"> 
                             <button type="submit" class="btn btn-primary btn-lg w-100">Recover Password</button>
@@ -56,6 +58,47 @@
 
     </div>
 
+        <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+
+    <script>
+
+      $(document).ready(function(){
+         let result = $(".response_message");
+         $(document).on("submit", ".create__account",function(evt){
+              evt.preventDefault();
+                          let formData = $(this).serialize(); 
+                          console.log(formData);
+
+                          $.ajax({
+                              url:"../api/auth/recover.php",
+                              method:"post", 
+                              data: formData, 
+                              beforeSend:()=>{
+                                result.html('<div class="text-center"><div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div></div>');
+                                $(this).find('button[type=submit]').prop('disabled', true); 
+                              },
+                              success: (res,status)=>{
+                                console.log(res);
+                                let r = JSON.parse(res);
+                                  if(r.msg =='success'){
+                                    result.html('<div class ="alert alert-success"> '+r.info+'</div>');
+                                    $(this).find('button[type=submit]').prop('disabled', false); 
+                                  }else{ 
+                                    result.html('<div class ="alert alert-danger">'+r.msg+'</div>'); 
+                                    $(this).find('button[type=submit]').prop('disabled', false); 
+                                }
+                          },
+                          error: function(error) { 
+                              console.log(error); 
+                        }
+                  });
+              }
+          );
+             
+
+      });
+    
+    </script>
     
 </body>
 </html>
