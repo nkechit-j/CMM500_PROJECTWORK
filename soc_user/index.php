@@ -261,7 +261,7 @@
         var input = document.querySelector('input[name=tags]');
         // initialize Tagify on the above input node reference
         new Tagify(input,{
-                whitelist: ["Python", "Java", "Database","JS","SQL"],
+                whitelist: ["Python", "Java", "Database","Data Warehousing","Data Management", "Data Mining","Intranet Systems Development ", "Data Visualisation","SQL"],
                 dropdown: {
                     position: "input",
                     enabled : 0 // always opens dropdown when input gets focus
