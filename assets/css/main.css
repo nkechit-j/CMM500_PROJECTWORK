@@ -299,3 +299,11 @@ form input{
     background-color: #b72fb7;
     color: #fff;
 }
+
+
+
+
+.dropdown-menu-dark {
+    right: 0 !important;
+    left: auto !important;
+ }

@@ -17,6 +17,13 @@ trait Common{
         return trim( stripslashes( htmlspecialchars( $input) ) );
     }
 
+// Return User Details as Associative array
+public function getUserByEmail($email){
+    $con        = $this->con();
+    $queryRow   = $con->query("SELECT * FROM `users` WHERE `st_email` ='$email'")->fetch_assoc();
+    return  $queryRow;
+}
+
     public function exists($val,$table,$col){
         $con     = $this->con();
         if(!empty($val)){

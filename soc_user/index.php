@@ -1,23 +1,29 @@
+<?php
+
+session_start();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BrainShare</title>
-<!--  Inclue the boostrap CSS CDN -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous"></head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BrainShare</title>
+        <!--  Inclue the boostrap CSS CDN -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+        <!-- Include Bootstrap Icon CDN -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
-<!-- Include Bootstrap Icon CDN -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+        <link href="https://unpkg.com/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
+            
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
-<link href="https://unpkg.com/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
-    
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+        <!-- custom CSS -->
+        <link rel="stylesheet" href="../assets/css/main.css" />
 
-<!-- custom CSS -->
-<link rel="stylesheet" href="../assets/css/main.css" />
-
-<link rel="shortcut icon" href="../assets/img/logo.png" type="image/x-icon" />
+        <link rel="shortcut icon" href="../assets/img/logo.png" type="image/x-icon" />
+</head>
 <body>
 
     <!--  Header - Naviagation bar -->
@@ -39,8 +45,8 @@
               <li> <a href ="#" type="button" class="btn btn-primary btn-lg mx-2 create_account account"  data-bs-toggle="offcanvas" data-bs-target="#Questions" aria-controls="staticBackdrop">Ask a Question</a></li>
             </ul>  
             
-              <div class="dropdown">
-                <i class="bi bi-list fs-1" type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
+              <div class="dropdown mx-4">
+                <i class="bi bi-list fs-1 mx-4" type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
                 <ul class="dropdown-menu dropdown-menu-dark">
                   <li><a class="dropdown-item active" href="#">Profile</a></li>
                   <li><a class="dropdown-item" href="#">My Questions</a></li>
@@ -228,8 +234,9 @@
                                 <input type="text" class="form-control w-100 p-2" id="tags" name="tags" placeholder="Choose tags">
                                 <!-- <label for="tags">Tags</label> -->
                             </div>
+                            <input type="hidden" name="user" value="<?=$_SESSION["_USER_EMAIL"]?>">
 
-
+                            <div class="result"></div>
                             <div class="form-floating"> 
                                     <button type="submit" class="btn btn-primary w-100">Submit Question</button>
                             </div>                         
@@ -256,6 +263,7 @@
 
     <script src="https://unpkg.com/@yaireo/tagify"></script>
     <script src="https://unpkg.com/@yaireo/tagify@3.1.0/dist/tagify.polyfills.min.js"></script>
+
     <script>
        // The DOM element you wish to replace with Tagify
         var input = document.querySelector('input[name=tags]');
@@ -269,14 +277,46 @@
              });
 
 
-    const form = document.querySelector('form.question_form');
-    form.addEventListener('submit', function(evt){
-        evt.preventDefault();
-        console.log(input.value);
-
-    });
-
   </script>
+
+<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+
+<script>
+
+  $(document).ready(function(){
+     let result = $(".result");
+     $(document).on("submit", "form.question_form",function(evt){
+          evt.preventDefault();
+                      let formData = $(this).serialize(); 
+                      console.log(formData);
+
+                      $.ajax({
+                          url:"../api/question/ask.php",
+                          method:"post", 
+                          data: formData, 
+                          beforeSend:()=>{
+                            result.html('<div class="text-center"><div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div></div>');
+                            $(this).find('button[type=submit]').prop('disabled', true); 
+                          },
+                          success: (res,status)=>{
+                            console.log(res);
+                            let r = JSON.parse(res);
+                              if(r.msg =='success'){
+                                result.html('<div class ="alert alert-success"> Successful! </div>');
+                                setTimeout(()=>{ location.reload() },2000);
+                              }else{ 
+                                result.html('<div class ="alert alert-danger">'+r.msg+'</div>'); 
+                                $(this).find('button[type=submit]').prop('disabled', false); 
+                            }
+                      } 
+              });
+          }
+      );
+         
+
+  });
+
+</script>
 
     <script src="../assets/js/main.js"></script>
 </body>

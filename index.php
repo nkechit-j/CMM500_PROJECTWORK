@@ -48,7 +48,7 @@
               <?php  } ?>
    
               <div class="dropdown">
-                <i class="bi bi-list fs-1" type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                <i class="bi bi-list fs-1 mx-4" type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
                 <ul class="dropdown-menu dropdown-menu-dark">
                   <li><a class="dropdown-item active" href="#">Profile</a></li>
                   <li><a class="dropdown-item" href="#">My Questions</a></li>
