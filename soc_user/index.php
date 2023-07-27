@@ -288,8 +288,9 @@ session_start();
      $(document).on("submit", "form.question_form",function(evt){
           evt.preventDefault();
                       let formData = $(this).serialize(); 
-                      console.log(formData);
-
+                      console.log(formData); 
+                      console.log($("#tags").val()); 
+                    //    return 0;
                       $.ajax({
                           url:"../api/question/ask.php",
                           method:"post", 

@@ -18,6 +18,7 @@ class Question{
        $tags      =   $this->cleanInput($_POST["tags"]);
        $user      =   $this->cleanInput($_POST["user"]);
 
+       $tag_asstring = json_decode($tags, true); 
        // check if the user already exist
 
        if( !$this->exists($user,"users","st_email") )  die(json_encode(['msg'=>"Login to ask Question"])); 
@@ -29,7 +30,7 @@ class Question{
           $stID = $this->getUserByEmail($user)['st_id'];
              
                 //  Store the user Question to the database
-                $sql = "INSERT INTO `question`(`q_title`, `question`,`st_id`,`q_tags`,`createdAt`) VALUES( '$title','$question','$stID','$tags',NOW() )";
+                $sql = "INSERT INTO `question`(`q_title`, `question`,`st_id`,`q_tags`,`createdAt`) VALUES( '$title','$question','$stID','$tag_asstring',NOW() )";
                 $query = $this->con()->query($sql);
                 // check if the query succeeded 
                 if($query){
