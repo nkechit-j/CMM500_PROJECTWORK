@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BrainShare - Login</title>
+    <title>BrainShare - Admin Login</title>
     <link rel="shortcut icon" href="../assets/img/logo.png" type="image/x-icon">
     <!--  Inclue the boostrap CSS CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous"></head>
@@ -21,7 +21,7 @@
 
         <div class="col-md-5">
              <div class="img_container">
-                <a href="../index.html">
+                <a href="./index.php">
                     <img src="../assets/img/logo.png" alt="logo"  />
                  </a>
              </div>
@@ -30,7 +30,7 @@
         <div class="col-md-7 form_con">
 
             <div class="form_container">
-                <h1> LOGIN </h1>
+                <h1> ADMIN LOGIN </h1>
                 <form action="" class="container create__account">  
 
                       <div class="form-floating mb-3">
@@ -42,17 +42,13 @@
                         <input type="password" class="form-control form-control-lg" id="password1" name="password1" placeholder="Choose Password">
                         <label for="password1">Password</label>
                       </div>
-                      <input type="hidden" name="login" value="user">
+                      <input type="hidden" name="login" value="admin">
+ 
 
                       <div class="form-floating"> 
                             <button type="submit" class="btn btn-primary btn-lg w-100">Login</button>
                       </div>
-                       <div class="response_message"></div>
-                      <p class="d-flex justify-content-between">
-                        <span class="have_account">Don't have an acccount yet ? </span> 
-                        <a href="../create-account/">Create An Account</a>   <a href="../forgot-password/">Forgot Password ?</a>
-                      </p>
-
+                       <div class="response_message"></div> 
                       
 
                 </form>
@@ -88,7 +84,7 @@
                                 let r = JSON.parse(res);
                                   if(r.msg =='success'){
                                     result.html('<div class ="alert alert-success"> Successful! </div>');
-                                    setTimeout(function(event){ window.location.href="../"; },3000);
+                                    setTimeout(function(event){ window.location.href="./"; },3000);
                                     localStorage.setItem("ACTIVE_USER",r.user);
                                   }else{ 
                                     result.html('<div class ="alert alert-danger">'+r.msg+'</div>'); 

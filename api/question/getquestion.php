@@ -14,7 +14,7 @@ class GetAQuestions{
                                 </div>
                                  <div class="card-footer text-body-secondary d-flex justify-content-between align-items-center text-small">                             
                                     <div class="tags">  <span>'.$row['q_tags'].'</span>  </div>
-                                    <div class="author_and_date"><span class="author">'.$this->getUserById($st_id)['st_username'].'</span><span class="datetime">'.$row['createdAt'].'</span>
+                                    <div class="author_and_date"><span class="author">'.$this->getUserById($st_id)['st_username'].' &nbsp; &nbsp; </span><span class="datetime">'.$row['createdAt'].'</span>
                                 </div>  </div> </div></div>';
 
                                 

@@ -1,4 +1,5 @@
-<?php
+<?php  
+require_once('../api/db.php');
 
 session_start();
 
@@ -27,188 +28,64 @@ session_start();
 <body>
 
     <!--  Header - Naviagation bar -->
-    <nav class="navbar navbar-expand-lg bg-light">
-        <div class="container-fluid">
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <a class="navbar-brand " href="#"> <img src="../assets/img/logo.png" alt="logo" height="50px" width="180px"></a>
-          <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <div class="input-group mb-3">
-                    <input type="search" class="form-control form-control-lg  search__input" placeholder="Search question" aria-label="question" aria-describedby="question_adon">
-                    <span class="input-group-text" id="question_adon"> <i class="bi bi-search"></i> </span>
-                  </div>
-              </li> 
+    <header class="">
+            <nav class="navbar navbar-expand-lg bg-light fixed-top">
+                <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand " href="./"> <img src="../assets/img/logo.png" alt="logo" height="50px" width="180px"></a>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <div class="input-group mb-3">
+                            <input type="search" class="form-control form-control-lg  search__input" placeholder="Search question" aria-label="question" aria-describedby="question_adon">
+                            <span class="input-group-text" id="question_adon"> <i class="bi bi-search"></i> </span>
+                        </div>
+                    </li> 
 
-              <li> <a href ="#" type="button" class="btn btn-primary btn-lg mx-2 create_account account"  data-bs-toggle="offcanvas" data-bs-target="#Questions" aria-controls="staticBackdrop">Ask a Question</a></li>
-            </ul>  
-            
-              <div class="dropdown mx-4">
-                <i class="bi bi-list fs-1 mx-4" type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
-                <ul class="dropdown-menu dropdown-menu-dark">
-                  <li><a class="dropdown-item active" href="#">Profile</a></li>
-                  <li><a class="dropdown-item" href="#">My Questions</a></li>
-                  <li><a class="dropdown-item" href="#">My Answers</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Logout</a></li>
-                </ul>
-              </div>
+                    <li> <a href ="#" type="button" class="btn btn-primary btn-lg mx-2 create_account account"  data-bs-toggle="offcanvas" data-bs-target="#Questions" aria-controls="staticBackdrop">Ask a Question</a></li>
+                    </ul>  
+                    
+                    <div class="dropdown mx-4">
+                        <i class="bi bi-list fs-1 mx-4" type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                        <li><a class="dropdown-item active" href="?u=profile">Profile</a></li>
+                        <li><a class="dropdown-item" href="?u=questions">My Questions</a></li>
+                        <li><a class="dropdown-item" href="?u=answers">My Answers</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="?u=logout">Logout</a></li>
+                        </ul>
+                    </div>
 
-          </div>
-        </div>
-</nav>
+                </div>
+                </div>
+            </nav>
+
+    </header>
 
      
 
+    <?php
+        if(isset($_GET['u']) && !empty($_GET['u']) ){
+            $part = trim($_GET['u']);
+            $realPart = "parts/".$part.".php";
+            if(file_exists($realPart)){
+                require_once($realPart);
+            }else{
+                require_once('parts/home.php');
+            }
+        }else{
+            require_once('parts/home.php');
+        }
 
-    <div class="row q_section">
-        <div class="col-md-4 col-md question__list">
-               <div class="inner_questions_list mx-2">
 
-                  <div class="card my-1 w-100"> 
-                        <div class="card-body">
-                            <h5 class="card-title">Special title treatment</h5>
-                            <p class="card-text">
-                                With supporting text below as a natural lead-in to additional content.
-                                With supporting text below as a natural lead-in to additional content.
-                                With supporting text below as a natural lead-in to additional content...
-                            </p>
-                            
-                        </div>
-                        <div class="card-footer text-body-secondary d-flex justify-content-between align-items-center">
-                            
-                            <div class="tags">
-                                  <span>Java|BigO|Data Structures</span>
-                            </div>
-
-                            <div class="author_and_date">
-                                  <span class="author">Joy John </span>
-                                  <span class="datetime"> 27/04/2023</span>
-                            </div>
-                        
-                        </div>
-                  </div>
-                     
-                  <div class="card my-1 w-100"> 
-                        <div class="card-body">
-                            <h5 class="card-title">Special title treatment</h5>
-                            <p class="card-text">
-                                With supporting text below as a natural lead-in to additional content.
-                                With supporting text below as a natural lead-in to additional content.
-                                With supporting text below as a natural lead-in to additional content...
-                            </p>
-                            
-                        </div>
-                        <div class="card-footer text-body-secondary d-flex justify-content-between align-items-center">
-                            
-                            <div class="tags">
-                                  <span>Java|BigO|Data Structures</span>
-                            </div>
-
-                            <div class="author_and_date">
-                                  <span class="author">Joy John </span>
-                                  <span class="datetime"> 27/04/2023</span>
-                            </div>
-                        
-                        </div>
-                  </div>
-                     
-                  <div class="card my-1 w-100"> 
-                        <div class="card-body">
-                            <h5 class="card-title">Special title treatment</h5>
-                            <p class="card-text">
-                                With supporting text below as a natural lead-in to additional content.
-                                With supporting text below as a natural lead-in to additional content.
-                                With supporting text below as a natural lead-in to additional content...
-                            </p>
-                            
-                        </div>
-                        <div class="card-footer text-body-secondary d-flex justify-content-between align-items-center">
-                            
-                            <div class="tags">
-                                  <span>Java|BigO|Data Structures</span>
-                            </div>
-
-                            <div class="author_and_date">
-                                  <span class="author">Joy John </span>
-                                  <span class="datetime"> 27/04/2023</span>
-                            </div>
-                        
-                        </div>
-                  </div>
-                     
-                  <div class="card my-1 w-100"> 
-                        <div class="card-body">
-                            <h5 class="card-title">Special title treatment</h5>
-                            <p class="card-text">
-                                With supporting text below as a natural lead-in to additional content.
-                                With supporting text below as a natural lead-in to additional content.
-                                With supporting text below as a natural lead-in to additional content...
-                            </p>
-                            
-                        </div>
-                        <div class="card-footer text-body-secondary d-flex justify-content-between align-items-center">
-                            
-                            <div class="tags">
-                                  <span>Java|BigO|Data Structures</span>
-                            </div>
-
-                            <div class="author_and_date">
-                                  <span class="author">Joy John </span>
-                                  <span class="datetime"> 27/04/2023</span>
-                            </div>
-                        
-                        </div>
-                  </div>
-                     
-                  <div class="card my-1 w-100"> 
-                        <div class="card-body">
-                            <h5 class="card-title">Special title treatment</h5>
-                            <p class="card-text">
-                                With supporting text below as a natural lead-in to additional content.
-                                With supporting text below as a natural lead-in to additional content.
-                                With supporting text below as a natural lead-in to additional content...
-                            </p>
-                            
-                        </div>
-                        <div class="card-footer text-body-secondary d-flex justify-content-between align-items-center">
-                            
-                            <div class="tags">
-                                  <span>Java|BigO|Data Structures</span>
-                            </div>
-
-                            <div class="author_and_date">
-                                  <span class="author">Joy John </span>
-                                  <span class="datetime"> 27/04/2023</span>
-                            </div>
-                        
-                        </div>
-                  </div>
-                     
-               
-
-               </div>
-        </div>
-
-        <div class="col-md-8 col-md text_container d-flex justify-content-center align-items-center">
-
-            <div class="inner__container"> 
-                   <p class="welcome__message">
-                       No Question <br/>  Selected yet.
-                   </p>
-            </div>
-
-        </div>
-
-        
-    </div>
+     ?>
 
 
 
 
-    <!-- off canvas for Asking Questions -->
+    <!-- off canvas for Asking Questions bg-light  p-4-->
     <div class="offcanvas offcanvas-end w-50 bg-grey" data-bs-backdrop="static" tabindex="-1" id="Questions" aria-labelledby="staticBackdropLabel">
         <div class="offcanvas-header">
           <h5 class="offcanvas-title" id="staticBackdropLabel">Asking Question</h5>
@@ -234,7 +111,7 @@ session_start();
                                 <input type="text" class="form-control w-100 p-2" id="tags" name="tags" placeholder="Choose tags">
                                 <!-- <label for="tags">Tags</label> -->
                             </div>
-                            <input type="hidden" name="user" value="<?=$_SESSION["_USER_EMAIL"]?>">
+                            <input type="hidden" name="user" id ="user" value="<?=$_SESSION["_USER_EMAIL"]?>">
 
                             <div class="result"></div>
                             <div class="form-floating"> 
@@ -251,13 +128,12 @@ session_start();
       </div>
 
 
-    <div class="my_footer bg-light d-flex justify-content-center align-items-center p-4">
+    <div class="my_footer fixed-bottom bg-light">
         <div class="footer_container">
-            <p>
-                <p class="footer_text"> Copyright  BrainShare <span class="year"></span></p>
-             
-                <span class="footer_developer">By Nkechi Taribo-Joseph </span>
-            </p>
+            <div class="text-center">
+                <p class="footer_text"> Copyright  BrainShare <span class="year"></span></p> 
+                <p class="footer_developer">By Nkechi Taribo-Joseph  </p> 
+            </div>
         </div>
     </div>
 
@@ -282,41 +158,176 @@ session_start();
 <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 
 <script>
+    $(document).ready(function(){
+        // hadle Question submission
+        let result = $(".result");
+        $(document).on("submit", "form.question_form",function(evt){
+            evt.preventDefault();
+                        let formData     = $(this).serialize(); 
+                        let unserialized = Object.fromEntries(new URLSearchParams(formData)); 
+                        console.log( unserialized );  
+                        $.ajax({
+                            url:"../api/question/ask.php",
+                            method:"post", 
+                            data: JSON.stringify(unserialized), 
+                            beforeSend:()=>{
+                                result.html('<div class="text-center"><div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div></div>');
+                                $(this).find('button[type=submit]').prop('disabled', true); 
+                            },
+                            success: (res,status)=>{
+                                console.log(res);
+                                let r = JSON.parse(res);
+                                if(r.msg =='success'){
+                                    result.html('<div class ="alert alert-success"> Successful! </div>');
+                                    setTimeout(()=>{ location.reload() },2000);
+                                }else{ 
+                                    result.html('<div class ="alert alert-danger">'+r.msg+'</div>'); 
+                                    $(this).find('button[type=submit]').prop('disabled', false); 
+                                }
+                        } 
+                });
+            }
+        );
 
-  $(document).ready(function(){
-     let result = $(".result");
-     $(document).on("submit", "form.question_form",function(evt){
-          evt.preventDefault();
-                      let formData = $(this).serialize(); 
-                      console.log(formData); 
-                      console.log($("#tags").val()); 
-                    //    return 0;
-                      $.ajax({
-                          url:"../api/question/ask.php",
-                          method:"post", 
-                          data: formData, 
-                          beforeSend:()=>{
-                            result.html('<div class="text-center"><div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div></div>');
-                            $(this).find('button[type=submit]').prop('disabled', true); 
-                          },
-                          success: (res,status)=>{
-                            console.log(res);
-                            let r = JSON.parse(res);
-                              if(r.msg =='success'){
-                                result.html('<div class ="alert alert-success"> Successful! </div>');
-                                setTimeout(()=>{ location.reload() },2000);
-                              }else{ 
-                                result.html('<div class ="alert alert-danger">'+r.msg+'</div>'); 
-                                $(this).find('button[type=submit]').prop('disabled', false); 
-                            }
-                      } 
-              });
-          }
-      );
-         
 
-  });
+        // Adding Comment comment_result
+        let comment_result = $(".comment_result");
+        $(document).on("submit", "form.comment_form",function(evt){
+            evt.preventDefault();
+                        let formData     = $(this).serialize();  
+                $.ajax({
+                    url:"../api/question/answer.php",
+                    method:"post", 
+                    data: formData, 
+                    beforeSend:()=>{
+                        comment_result.html('<div class="text-center"><div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div></div>');
+                        $(this).find('button[type=submit]').prop('disabled', true); 
+                    },
+                    success: (res,status)=>{
+                        console.log(res);
+                        let r = JSON.parse(res);
+                        if(r.msg =='success'){
+                            comment_result.html('<div class ="alert alert-success"> Successful! </div>');
+                            setTimeout(()=>{ location.reload() },2000);
+                        }else{ 
+                            comment_result.html('<div class ="alert alert-danger">'+r.msg+'</div>'); 
+                            $(this).find('button[type=submit]').prop('disabled', false); 
+                        }
+                   } 
+                });
+            }
+        );
 
+
+
+
+                // Updating profile
+                let profile_result = $(".profile_result");
+        $(document).on("submit", "form.update_profile_form",function(evt){
+            evt.preventDefault();
+                let formData     = $(this).serialize();  
+                $.ajax({
+                    url:"../api/profile/updateprofile.php",
+                    method:"post", 
+                    data: formData, 
+                    beforeSend:()=>{
+                        profile_result.html('<div class="text-center"><div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div></div>');
+                        $(this).find('button[type=submit]').prop('disabled', true); 
+                    },
+                    success: (res,status)=>{
+                        console.log(res);
+                        let r = JSON.parse(res);
+                        if(r.msg =='success'){
+                            profile_result.html('<div class ="alert alert-success"> Successful! </div>');
+                            setTimeout(()=>{ location.reload() },1000);
+                            $(this).find('button[type=submit]').prop('disabled', false); 
+                        }else{ 
+                            profile_result.html('<div class ="alert alert-danger">'+r.msg+'</div>'); 
+                            $(this).find('button[type=submit]').prop('disabled', false); 
+                        }
+                   } 
+                });
+            }
+        );
+
+
+
+
+        // updating password  
+
+        let password_result = $(".password_result");
+        $(document).on("submit", "form.passwor_update_form",function(evt){
+            evt.preventDefault();
+            let formData     = $(this).serialize();  
+                $.ajax({
+                    url:"../api/profile/changepassword.php",
+                    method:"post", 
+                    data: formData, 
+                    beforeSend:()=>{
+                        password_result.html('<div class="text-center"><div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div></div>');
+                        $(this).find('button[type=submit]').prop('disabled', true); 
+                    },
+                    success: (res,status)=>{
+                        console.log(res);
+                        let r = JSON.parse(res);
+                        if(r.msg =='success'){
+                            password_result.html('<div class ="alert alert-success"> Successful! </div>');
+                            setTimeout(()=>{ location.reload() },1000);
+                            $(this).find('button[type=submit]').prop('disabled', false); 
+                        }else{ 
+                            password_result.html('<div class ="alert alert-danger">'+r.msg+'</div>'); 
+                            $(this).find('button[type=submit]').prop('disabled', false); 
+                        }
+                   } 
+                });
+            }
+        );
+
+        function truncateString(str, maxLength) {
+            return str.length > maxLength ? str.slice(0, maxLength) + "..." : str;
+         }
+
+        // get list of all questions
+        let output  =$(".question__list");
+        fetch('../api/question/all_questions.php').then(response => {
+                if (!response.ok) {  throw new Error('Network response was not ok');   }
+                   return response.json(); })
+                    .then(data => {
+                    // Use the data returned from the API 
+                    for(let question of data.msg) {
+                        output.append(` <div class="inner_questions_list mx-2">   
+                                        <div class="card my-1 w-100" id ="question_${question.q_id}" name="student_${question.st_id}"> 
+                                            <div class="card-body">
+                                                <h5 class="card-title">${question.q_title}</h5>
+                                                <p class="card-text">${truncateString(question.question,90)} </p> 
+                                            </div>
+                                            <div class="card-footer text-body-secondary d-flex justify-content-between align-items-center text-small">                             
+                                                <div class="tags">  <span>${question.q_tags}</span>  </div>
+                                                <div class="author_and_date"><span class="author">  </span>  <span class="datetime">${question.createdAt}</span>
+                                                </div>
+                                            
+                                            </div>
+                                        </div>
+                                            
+                                    </div>`);
+                    } 
+                
+                console.log(data.msg); 
+            })
+            .catch(error => {
+                // Handle any errors that occurred during the fetch request
+                console.error('Error fetching data:', error);
+            });
+
+
+            // when each of the question is clicked
+            $(document).on('click','.card',function(evt){
+                let student_id  = $(this).attr("name")
+                let question_id = $(this).attr("id");
+                location.assign('?stid='+student_id.split("_")[1]+'&qid='+question_id.split("_")[1]);
+
+            });
+    });
 </script>
 
     <script src="../assets/js/main.js"></script>

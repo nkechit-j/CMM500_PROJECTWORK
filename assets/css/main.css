@@ -41,7 +41,8 @@ body{
 
 
 .my_footer{
-    height: 70px;
+    height: 100px; 
+
 }
 
 .footer_text{
@@ -272,10 +273,15 @@ form input{
 
 
 /* QUSETIONS SECTION  */
-
-.question__list{
-   max-height: calc(100vh - 140px);
+.question__list, .inner__container{
+   max-height: calc(100vh - 170px);
    overflow-y: auto;
+   margin-top: 100px;
+   margin-bottom: 100px;
+}
+
+.text_container{
+
 }
 
 .card-title{
@@ -307,3 +313,28 @@ form input{
     right: 0 !important;
     left: auto !important;
  }
+
+ .card-footer{
+    font-size: 10px !important;
+ }
+
+
+
+
+
+ /*  ADMIN SECTION STYLES */
+ .sidebar{
+    max-height: calc(100vh - 170px);
+    overflow-y: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.inner_siderbar{
+    max-height: calc(100vh - 170px) !important;
+    overflow-y: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+ 

@@ -1,6 +1,4 @@
-<?php
-   session_start();
-?>
+<?php session_start(); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,6 +19,14 @@
 
 <link rel="shortcut icon" href="assets/img/logo.png" type="image/x-icon" />
 <body>
+
+<?php  
+      if(isset($_GET['u']) && !empty($_GET['u']) && $_GET['u'] =='logout' ){
+        session_destroy();
+        header("location:index.php");
+        // echo '<script> location.href ="index.php"; </sscript>';
+    }
+?>
 
     <!--  Header - Naviagation bar -->
     <nav class="navbar navbar-expand-lg bg-light">
@@ -46,39 +52,39 @@
                 <a href ="./login/" type="button" class="btn btn-primary btn-lg login account">Login</a> 
               </div>
               <?php  } ?>
-   
+              <?php  if( isset($_SESSION['_USER_EMAIL']) ){?>
               <div class="dropdown">
                 <i class="bi bi-list fs-1 mx-4" type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
                 <ul class="dropdown-menu dropdown-menu-dark">
-                  <li><a class="dropdown-item active" href="#">Profile</a></li>
-                  <li><a class="dropdown-item" href="#">My Questions</a></li>
-                  <li><a class="dropdown-item" href="#">My Answers</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Logout</a></li>
+                    <li><a class="dropdown-item active" href="?u=profile">Profile</a></li>
+                    <li><a class="dropdown-item" href="?u=questions">My Questions</a></li>
+                    <li><a class="dropdown-item" href="?u=answers">My Answers</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="?u=logout">Logout</a></li>
                 </ul>
               </div>
-
+              <?php  } ?>
           </div>
         </div>
       </nav>
 
 <!--  show this section when the iser os logged in  -->
+    <?php  if( isset($_SESSION['_USER_EMAIL']) ){?>
       <div class="home_to_auth_section">
-
         
-     <div class="row">
-      <div class="col-md-12 col-md text_container top d-flex justify-content-center align-items-center">
+          <div class="row">
+            <div class="col-md-12 col-md text_container top d-flex justify-content-center align-items-center">
 
-          <div class="inner__container m-4 pt-4">
-                 <h1 class="h1 h1_welcome_title"> Welcome To BrainShare</h1>
-                 <p class="welcome__message p-4">
-                     BrainShare is an SOC online Q&A <br/>  platform for knowlegde-sharing.
-                 </p>
-          </div>
+                <div class="inner__container m-4 pt-4">
+                      <h1 class="h1 h1_welcome_title"> Welcome To BrainShare</h1>
+                      <p class="welcome__message p-4">
+                          BrainShare is an SOC online Q&A <br/>  platform for knowlegde-sharing.
+                      </p>
+                </div>
 
-      </div>
+            </div>
 
-      <!-- Call to ACTION --> 
+               <!-- Call to ACTION --> 
 
               <div class="col-md-12 col-md text_container top2 d-flex justify-content-center align-items-center">
                   <div class="inner__container m-4 pt-4">
@@ -92,6 +98,7 @@
 
 
       </div>
+      <?php  } ?>
      
 
       <?php  if( !isset($_SESSION['_USER_EMAIL']) ){?>
