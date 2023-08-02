@@ -214,7 +214,7 @@ form .btn-primary{
 form input{
     border-radius: 0 !important; 
     border: 1px solid #c0c !important;
-    padding: 20px !important;
+    /* padding: 20px !important; */
     color: #8936BB !important;
 }
 /* end of form input */
@@ -335,6 +335,31 @@ form input{
     overflow-y: auto;
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+.edit_question{
+    background-color: purple !important;
+    border: 0;
+    outline: none;
+}
+
+.view_question{
+    background-color: #4c2c4c !important;
+    border: 0;
+    outline: none;
+    color:white;
+}
+
+.inner_siderbar ul li a{
+        color:purple !important;
+        font-size: 24px;
+        font-weight: bold;
+}
+
+.inner_siderbar ul li a > i{
+    color:purple !important;
+    font-size: 24px;
+    font-weight: bold;
 }
 
  

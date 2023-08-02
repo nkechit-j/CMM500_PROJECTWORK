@@ -38,9 +38,9 @@ session_start();
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <div class="input-group mb-3">
-                            <input type="search" class="form-control form-control-lg  search__input" placeholder="Search question" aria-label="question" aria-describedby="question_adon">
-                            <span class="input-group-text" id="question_adon"> <i class="bi bi-search"></i> </span>
+                        <div class="input-group mb-3"> 
+                            <input type="search" class="form-control form-control-lg  search__input" name="question" placeholder="Search question" aria-label="question" aria-describedby="question_adon">
+                            <span class="input-group-text" id="question_adon" type="submit"> <i class="bi bi-search"></i> </span>                           
                         </div>
                     </li> 
 
@@ -67,16 +67,23 @@ session_start();
      
 
     <?php
-        if(isset($_GET['u']) && !empty($_GET['u']) ){
-            $part = trim($_GET['u']);
-            $realPart = "parts/".$part.".php";
-            if(file_exists($realPart)){
-                require_once($realPart);
+
+        if(isset($_GET['s']) && !empty($_GET['s']) ){
+              $t->showSearchResult( trim($_GET['s']) );  
+        }else{
+
+            if(isset($_GET['u']) && !empty($_GET['u']) ){
+                $part = trim($_GET['u']);
+                $realPart = "parts/".$part.".php";
+                if(file_exists($realPart)){
+                    require_once($realPart);
+                }else{
+                    require_once('parts/home.php');
+                }
             }else{
                 require_once('parts/home.php');
             }
-        }else{
-            require_once('parts/home.php');
+
         }
 
 
@@ -98,7 +105,7 @@ session_start();
                         <form action="" class="container my-4 question_form">  
 
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control w-100" id="title" name="title" placeholder="title">
+                                <input type="text" class="form-control w-100 form-control-lg" id="title" name="title" placeholder="title">
                                 <label for="title">Title</label>
                             </div>
 
@@ -112,10 +119,57 @@ session_start();
                                 <!-- <label for="tags">Tags</label> -->
                             </div>
                             <input type="hidden" name="user" id ="user" value="<?=$_SESSION["_USER_EMAIL"]?>">
+                           
 
                             <div class="result"></div>
                             <div class="form-floating"> 
                                     <button type="submit" class="btn btn-primary w-100">Submit Question</button>
+                            </div>                         
+
+                        </form>
+
+                    </div>
+
+                    </div>
+            </div>
+            </div>
+      </div>
+
+
+
+
+    <!-- off canvas for Editing  Questions bg-light  p-4-->
+    <div class="offcanvas offcanvas-end w-50 bg-grey" data-bs-backdrop="static" tabindex="-1" id="edit_Questions" aria-labelledby="staticBackdropLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="staticBackdropLabel">Editing  Question</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+          <div class="offcanvas-body p-0 bg-light">
+            <div class="row">
+            <div class="col-md-12 form_con">
+                    <div class="form_container"> 
+                        <form action="" class="container my-4 edit_question_form">  
+
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control w-100 form-control-lg" id="edit_title" name="title" placeholder="title">
+                                <label for="title">Title</label>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <textarea class="form-control h-50" rows="10" placeholder="type your question here" id="edit_ques" name="question"></textarea>
+                                <label for="ques">Question</label>
+                            </div>
+
+                            <div class="form-row mb-3">
+                                <input type="text" class="form-control w-100 p-2" id="edit_tags" name="tags" placeholder="Choose tags">
+                                <!-- <label for="tags">Tags</label> -->
+                            </div>
+                            <input type="hidden" name="user" id ="user" value="<?=$_SESSION["_USER_EMAIL"]?>">
+                            <input type="hidden" name="action" id ="action" value="edit"> 
+
+                            <div class="result"></div>
+                            <div class="form-floating"> 
+                                    <button type="submit" class="btn btn-primary w-100">Submit Edit</button>
                             </div>                         
 
                         </form>
@@ -142,15 +196,18 @@ session_start();
 
     <script>
        // The DOM element you wish to replace with Tagify
-        var input = document.querySelector('input[name=tags]');
+        var input = document.querySelectorAll('input[name=tags]');
         // initialize Tagify on the above input node reference
-        new Tagify(input,{
-                whitelist: ["Python", "Java", "Database","Data Warehousing","Data Management", "Data Mining","Intranet Systems Development ", "Data Visualisation","SQL"],
-                dropdown: {
-                    position: "input",
-                    enabled : 0 // always opens dropdown when input gets focus
-                }
-             });
+        for (let i of input){
+            new Tagify(i,{
+                    whitelist: ["Python", "Java", "Database","Data Warehousing","Data Management", "Data Mining","Intranet Systems Development ", "Data Visualisation","SQL"],
+                    dropdown: {
+                        position: "input",
+                        enabled : 0 // always opens dropdown when input gets focus
+                    }
+                });
+        }
+
 
 
   </script>
@@ -325,8 +382,68 @@ session_start();
                 let student_id  = $(this).attr("name")
                 let question_id = $(this).attr("id");
                 location.assign('?stid='+student_id.split("_")[1]+'&qid='+question_id.split("_")[1]);
+            }); 
+            
+            //when the seacrh bar button is  clicked search__input
 
+            $(document).on('click','#question_adon',function(evt){
+                let seacrh  = $(".search__input").val();
+                location.assign('?s='+seacrh);
             });
+
+
+            //When the Edit button is cliked
+            $(document).on('click','.edit_question',function(evt){
+                let qu_id  = $(this).attr('href').split('_')[1]; 
+                $.ajax({
+                    url:"../api/question/one_question.php",
+                    method:"GET",
+                    data:{q_id:qu_id},
+                    success:(res)=>{
+                        console.log(res);
+                        let r = JSON.parse(res);
+                        console.log(r);
+                         $("#edit_title").val(r.msg.q_title);
+                         $("#edit_ques").val(r.msg.question);
+                         $("#edit_tags").val(r.msg.q_tags.split("|").join(",")); 
+                        
+                    }
+                });
+
+                        // hadle Question submission
+                    let result = $(".result");
+                    $(document).on("submit", "form.edit_question_form",function(evt){
+                        evt.preventDefault();
+                                    let formData     = $(this).serialize(); 
+                                    let unserialized = Object.fromEntries(new URLSearchParams(formData)); 
+                                    unserialized.q_id = qu_id;  // Adding the question ID to the unserlai=zed form data
+                                    console.log( unserialized );  
+                                    
+                                    $.ajax({
+                                        url:"../api/question/update.php",
+                                        method:"post", 
+                                        data: JSON.stringify(unserialized), 
+                                        beforeSend:()=>{
+                                            result.html('<div class="text-center"><div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div></div>');
+                                            $(this).find('button[type=submit]').prop('disabled', true); 
+                                        },
+                                        success: (res,status)=>{
+                                            console.log(res);
+                                            let r = JSON.parse(res);
+                                            if(r.msg =='success'){
+                                                result.html('<div class ="alert alert-success"> Successful! </div>');
+                                                setTimeout(()=>{ location.reload() },2000);
+                                            }else{ 
+                                                result.html('<div class ="alert alert-danger">'+r.msg+'</div>'); 
+                                                $(this).find('button[type=submit]').prop('disabled', false); 
+                                            }
+                                    } 
+                            });
+                        }
+                    );
+            });
+
+
     });
 </script>
 

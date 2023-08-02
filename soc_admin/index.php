@@ -101,6 +101,7 @@
   </div>
  
 
+<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 
 <!-- Link Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -161,6 +162,73 @@
     data: data,
     options: options
   });
+
+
+
+
+
+
+                  // Updating profile
+                  let profile_result = $(".profile_result");
+        $(document).on("submit", "form.update_profile_form",function(evt){
+            evt.preventDefault();
+                let formData     = $(this).serialize();  
+                $.ajax({
+                    url:"../api/profile/updateprofile.php",
+                    method:"post", 
+                    data: formData, 
+                    beforeSend:()=>{
+                        profile_result.html('<div class="text-center"><div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div></div>');
+                        $(this).find('button[type=submit]').prop('disabled', true); 
+                    },
+                    success: (res,status)=>{
+                        console.log(res);
+                        let r = JSON.parse(res);
+                        if(r.msg =='success'){
+                            profile_result.html('<div class ="alert alert-success"> Successful! </div>');
+                            setTimeout(()=>{ location.reload() },1000);
+                            $(this).find('button[type=submit]').prop('disabled', false); 
+                        }else{ 
+                            profile_result.html('<div class ="alert alert-danger">'+r.msg+'</div>'); 
+                            $(this).find('button[type=submit]').prop('disabled', false); 
+                        }
+                   } 
+                });
+            }
+        );
+
+
+
+
+        // updating password  
+
+        let password_result = $(".password_result");
+        $(document).on("submit", "form.passwor_update_form",function(evt){
+            evt.preventDefault();
+            let formData     = $(this).serialize();  
+                $.ajax({
+                    url:"../api/profile/changepassword.php",
+                    method:"post", 
+                    data: formData, 
+                    beforeSend:()=>{
+                        password_result.html('<div class="text-center"><div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div></div>');
+                        $(this).find('button[type=submit]').prop('disabled', true); 
+                    },
+                    success: (res,status)=>{
+                        console.log(res);
+                        let r = JSON.parse(res);
+                        if(r.msg =='success'){
+                            password_result.html('<div class ="alert alert-success"> Successful! </div>');
+                            setTimeout(()=>{ location.reload() },1000);
+                            $(this).find('button[type=submit]').prop('disabled', false); 
+                        }else{ 
+                            password_result.html('<div class ="alert alert-danger">'+r.msg+'</div>'); 
+                            $(this).find('button[type=submit]').prop('disabled', false); 
+                        }
+                   } 
+                });
+            }
+        );
 </script>
 
 </body>
