@@ -23,6 +23,12 @@
 <link rel="stylesheet" href="../assets/css/main.css" />
 
 <link rel="shortcut icon" href="assets/img/logo.png" type="image/x-icon" />
+
+
+<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+
+<!-- Link Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <body>
 
 <div class="">
@@ -72,6 +78,7 @@
        <!-- Main Content Area -->
       <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
         <!-- Add your main content here -->
+        <div class="action_result"></div>
         <?php
 
             //check to ensure the Admin is Logged in
@@ -101,67 +108,75 @@
   </div>
  
 
-<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 
-<!-- Link Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
-  // Sample data for line graph
-  var data = {
-    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-    datasets: [
-      {
-        label: 'Questions',
-        data: [50, 65, 80, 100, 85, 70, 60, 75, 90, 110, 95, 70],
-        borderColor: 'rgba(255, 99, 132, 1)',
-        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-        tension: 0.4
-      },
-      {
-        label: 'Answers',
-        data: [30, 45, 60, 10, 70, 55, 50, 65, 35, 90, 80, 105],
-        borderColor: 'rgba(54, 162, 235, 1)',
-        backgroundColor: 'rgba(54, 162, 235, 0.2)',
-        tension: 0.4
-      }
-    ]
-  };
 
-  // Chart options
-  var options = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: 'top',
-      },
-      title: {
-        display: true,
-        text: 'Key'
-      }
-    },
-    scales: {
-      x: {
-        beginAtZero: true,
-        grid: {
-          display: true
-        }
-      },
-      y: {
-        beginAtZero: true,
-        grid: {
-          display: true
-        }
-      }
-    }
-  };
 
-  // Create the line chart
-  var lineChart = new Chart(document.getElementById('lineChart'), {
-    type: 'line',
-    data: data,
-    options: options
-  });
+let action_result = $(".action_result");
+        // disable_question
+
+        $(document).on("click", ".del_question",function(evt){
+            evt.preventDefault();
+
+              if( confirm("Are you sure you want to delete this question ?") ){
+                  let qid = $(this).attr('id').split("_")[1];
+                  console.log(qid);
+                  $.ajax({
+                      url:"../api/question/delete.php",
+                      method:"post", 
+                      data: {id:qid,action_type:"q"}, 
+                      beforeSend:()=>{
+                          action_result.html('<div class="text-center"><div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div></div>'); 
+                      },
+                      success: (res,status)=>{
+                          console.log(res);
+                          let r = JSON.parse(res);
+                          if(r.msg =='success'){
+                              action_result.html('<div class ="alert alert-success"> Successful! </div>');
+                              setTimeout(()=>{ location.reload() },1000); 
+                          }else{ 
+                              action_result.html('<div class ="alert alert-danger">'+r.msg+'</div>');  
+                          }
+                    } 
+                  });
+              }
+
+            }
+        );
+
+
+
+        $(document).on("click", ".disable_question",function(evt){
+            evt.preventDefault();
+
+              if( confirm("Are you sure you want to disable this question ?") ){
+                  let qid = $(this).attr('id').split("_")[1];
+                  $.ajax({
+                      url:"../api/question/disable.php",
+                      method:"post", 
+                      data: {id:qid,action_type:"q"}, 
+                      beforeSend:()=>{
+                          action_result.html('<div class="text-center"><div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div></div>'); 
+                      },
+                      success: (res,status)=>{
+                          console.log(res);
+                          let r = JSON.parse(res);
+                          if(r.msg =='success'){
+                              action_result.html('<div class ="alert alert-success"> Successful! </div>');
+                              setTimeout(()=>{ location.reload() },1000); 
+                          }else{ 
+                              action_result.html('<div class ="alert alert-danger">'+r.msg+'</div>');  
+                          }
+                    } 
+                  });
+              }
+
+            }
+        );
+
+
+
 
 
 
@@ -169,7 +184,7 @@
 
 
                   // Updating profile
-                  let profile_result = $(".profile_result");
+         let profile_result = $(".profile_result");
         $(document).on("submit", "form.update_profile_form",function(evt){
             evt.preventDefault();
                 let formData     = $(this).serialize();  
@@ -229,6 +244,77 @@
                 });
             }
         );
+
+
+
+
+
+
+
+        // for NSWERS
+
+        
+        $(document).on("click", ".del_answer",function(evt){
+            evt.preventDefault();
+
+              if( confirm("Are you sure you want to delete this question ?") ){
+                  let qid = $(this).attr('id').split("_")[1];
+                  console.log(qid);
+                  $.ajax({
+                      url:"../api/question/delete.php",
+                      method:"post", 
+                      data: {id:qid,action_type:"a"}, 
+                      beforeSend:()=>{
+                          action_result.html('<div class="text-center"><div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div></div>'); 
+                      },
+                      success: (res,status)=>{
+                          console.log(res);
+                          let r = JSON.parse(res);
+                          if(r.msg =='success'){
+                              action_result.html('<div class ="alert alert-success"> Successful! </div>');
+                              setTimeout(()=>{ location.reload() },1000); 
+                          }else{ 
+                              action_result.html('<div class ="alert alert-danger">'+r.msg+'</div>');  
+                          }
+                    } 
+                  });
+              }
+
+            }
+        );
+
+        
+
+
+        $(document).on("click", ".disable_answer",function(evt){
+            evt.preventDefault();
+
+              if( confirm("Are you sure you want to disable this question ?") ){
+                  let qid = $(this).attr('id').split("_")[1];
+                  $.ajax({
+                      url:"../api/question/disable.php",
+                      method:"post", 
+                      data: {id:qid,action_type:"a"}, 
+                      beforeSend:()=>{
+                          action_result.html('<div class="text-center"><div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div></div>'); 
+                      },
+                      success: (res,status)=>{
+                          console.log(res);
+                          let r = JSON.parse(res);
+                          if(r.msg =='success'){
+                              action_result.html('<div class ="alert alert-success"> Successful! </div>');
+                              setTimeout(()=>{ location.reload() },1000); 
+                          }else{ 
+                              action_result.html('<div class ="alert alert-danger">'+r.msg+'</div>');  
+                          }
+                    } 
+                  });
+              }
+
+            }
+        );
+
+
 </script>
 
 </body>

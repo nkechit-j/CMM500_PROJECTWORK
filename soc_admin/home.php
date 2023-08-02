@@ -46,3 +46,64 @@
       </div>
     </div>
   </div>
+
+
+
+  <script>
+    
+  // Sample data for line graph
+  var data = {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    datasets: [
+      {
+        label: 'Questions',
+        data: [50, 65, 80, 100, 85, 70, 60, 75, 90, 110, 95, 70],
+        borderColor: 'rgba(255, 99, 132, 1)',
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        tension: 0.4
+      },
+      {
+        label: 'Answers',
+        data: [30, 45, 60, 10, 70, 55, 50, 65, 35, 90, 80, 105],
+        borderColor: 'rgba(54, 162, 235, 1)',
+        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+        tension: 0.4
+      }
+    ]
+  };
+
+  // Chart options
+  var options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'Key'
+      }
+    },
+    scales: {
+      x: {
+        beginAtZero: true,
+        grid: {
+          display: true
+        }
+      },
+      y: {
+        beginAtZero: true,
+        grid: {
+          display: true
+        }
+      }
+    }
+  };
+
+  // Create the line chart
+  var lineChart = new Chart(document.getElementById('lineChart'), {
+    type: 'line',
+    data: data,
+    options: options
+  });
+  </script>

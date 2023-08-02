@@ -37,12 +37,13 @@
           <a class="navbar-brand " href="#"> <img src="assets/img/logo.png" alt="logo" height="50px" width="180px"></a>
           <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <div class="input-group mb-3">
                     <input type="search" class="form-control form-control-lg  search__input" placeholder="Search question" aria-label="question" aria-describedby="question_adon">
                     <span class="input-group-text" id="question_adon"> <i class="bi bi-search"></i> </span>
                   </div>
-              </li> 
+              </li>  -->
+              <li class="nav-item"> &nbsp;  </li> 
             </ul>
 
 
@@ -87,7 +88,7 @@
                <!-- Call to ACTION --> 
 
               <div class="col-md-12 col-md text_container top2 d-flex justify-content-center align-items-center">
-                  <div class="inner__container m-4 pt-4">
+                  <div class=" m-4 pt-4">
                       <a href="./soc_user/" class="btn btn-primary btn-lg w-100 mx-4">
                               <h1> Ask a Question</h1>
                       </a>

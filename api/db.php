@@ -45,6 +45,52 @@ public function getQById($qid){
 }
 
 
+public function deleteQuestion($id){
+        $con        = $this->con(); 
+        $q   = $con->query("DELETE  FROM `question` WHERE `q_id` ='$id'");
+        if($q){
+            echo json_encode( ["msg"=>"success"] );
+        }else{
+            echo json_encode( ["msg"=>"Error Deleting Record"] );
+        }
+}
+
+public function deleteAnswer($id){
+    $con        = $this->con(); 
+    $q          = $con->query("DELETE FROM `answers` WHERE `ans_id` ='$id'");
+    if($q){
+        echo json_encode( ["msg"=>"success"] );
+    }else{
+        echo json_encode( ["msg"=>"Error Deleting Record"] );
+    }
+}
+
+
+public function disableQuestion($id){
+        $con = $this->con(); 
+        $q   = $con->query("UPDATE `question` SET `status` = '0' WHERE `q_id` ='$id'");
+        if($q){
+            echo json_encode( ["msg"=>"success"] );
+        }else{
+            echo json_encode( ["msg"=>"Error Deleting Record"] );
+        }
+}
+
+public function disableAnswer($id){
+    $con = $this->con(); 
+    $q   = $con->query("UPDATE `answers` SET `status` = '0' WHERE `ans_id` ='$id'");
+    if($q){
+        echo json_encode( ["msg"=>"success"] );
+    }else{
+        echo json_encode( ["msg"=>"Error Deleting Record"] );
+    }
+}
+
+
+
+
+
+
 // Get User/Question details by ID
 public function getQuestionById($uid){
     $con        = $this->con();
@@ -106,8 +152,8 @@ public function getAllQuestions(){
                 <td>'.$this->totalAnswersTo($row['q_id']).'</td>   
                 <td>'.$row['createdAt'].'</td>   
                 <td> 
-                <button class="btn btn-danger btn-sm"    id="user_del_'.$row['q_id'].'" data-toggle="modal" data-target="#deleteModal1">Delete</button>
-                <button class="btn btn-secondary btn-sm" id="user_dis_'.$row['q_id'].'  data-toggle="modal" data-target="#disableModal1">Disable</button>
+                <button class="btn btn-danger btn-sm del_question"    id="del_'.$row['q_id'].'" data-toggle="modal" data-target="#deleteModal1">Delete</button>
+                <button class="btn btn-secondary btn-sm disable_question" id="dis_'.$row['q_id'].'  data-toggle="modal" data-target="#disableModal1">Disable</button>
                 </td>
             </tr>';
      }
@@ -124,8 +170,8 @@ public function getAllAnswers(){
                 <td>'.$this->getUserById($row['st_id'])['st_username'].'</td>   
                 <td>'.$row['createdAt'].'</td>   
                 <td> 
-                <button class="btn btn-danger btn-sm"    id="user_del_'.$row['ans_id'].'" data-toggle="modal" data-target="#deleteModal1">Delete</button>
-                <button class="btn btn-secondary btn-sm" id="user_dis_'.$row['ans_id'].'  data-toggle="modal" data-target="#disableModal1">Disable</button>
+                <button class="btn btn-danger btn-sm del_answer"    id="del_'.$row['ans_id'].'"     data-toggle="modal" data-target="#deleteModal1">Delete</button>
+                <button class="btn btn-secondary btn-sm disable_answer" id="dis_'.$row['ans_id'].'  data-toggle="modal" data-target="#disableModal1">Disable</button>
                 </td>
             </tr>';
      }
