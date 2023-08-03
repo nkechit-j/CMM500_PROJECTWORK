@@ -23,7 +23,7 @@ class Recover{
             if($query){
 
                 $this->message['msg']  = "success";       
-                $this->message['info'] = "We have sent you a mail. Kindly check your email for the next process {$newPassword}"; 
+                $this->message['info'] = "Kindly check your email for the next process"; 
 
                 // send email contaiining the new password to the user
                 $recover_messsgae = '<h3>Password Recovery Request</h3>

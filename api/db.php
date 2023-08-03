@@ -166,7 +166,7 @@ public function getAllAnswers(){
         echo '<tr>
                 <td>'.( ++$counter ).'</td>
                 <td>'.$this->getQById($row['q_id'])['question'].'</td>
-                <td>'. $this->getUserById( $this->getQById($row['st_id'])['st_id'] )['st_username'] .'</td> 
+                <td>'. $this->getUserById( $this->getQById($row['q_id'])['st_id'] )['st_username'] .'</td> 
                 <td>'.$this->getUserById($row['st_id'])['st_username'].'</td>   
                 <td>'.$row['createdAt'].'</td>   
                 <td> 

@@ -16,6 +16,7 @@
                     <input type="text" class="form-control" id="username"  name="username" value ="<?= $t->getUserById($_SESSION["_USER_ID"])['st_username']?>" placeholder="Enter your username" required />
                     </div>
                     <input type="hidden" name="user_id" value="<?= $_SESSION["_USER_ID"] ?>">
+                    <input type="hidden" name="user_type" value="user">
                     <div class="profile_result"></div>
                     <button type="submit" class="btn btn-primary my-4">Update</button>
                 </form>
@@ -43,6 +44,7 @@
                     <input type="password" class="form-control" id="confirmNewPassword" name="confirmNewPassword" placeholder="Confirm your new password" required />
                     </div>
                     <input type="hidden" name="user_id" value="<?= $_SESSION["_USER_ID"] ?>">
+                    <input type="hidden" name="user_type" value="user">
                     <div class="password_result"></div>
                     <button type="submit" class="btn btn-primary my-4">Update Password</button>
                 </form>
