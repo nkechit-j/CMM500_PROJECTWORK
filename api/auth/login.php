@@ -78,7 +78,7 @@ class Login{
                             }
 
                         }else{
-                            $this->message['msg'] = "User Not Found. Create an Account."; 
+                            $this->message['msg'] = "User Not Found."; 
                         }
 
             break;
