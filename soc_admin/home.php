@@ -50,60 +50,81 @@
 
 
   <script>
-    
-  // Sample data for line graph
-  var data = {
-    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-    datasets: [
-      {
-        label: 'Questions',
-        data: [50, 65, 80, 100, 85, 70, 60, 75, 90, 110, 95, 70],
-        borderColor: 'rgba(255, 99, 132, 1)',
-        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-        tension: 0.4
-      },
-      {
-        label: 'Answers',
-        data: [30, 45, 60, 10, 70, 55, 50, 65, 35, 90, 80, 105],
-        borderColor: 'rgba(54, 162, 235, 1)',
-        backgroundColor: 'rgba(54, 162, 235, 0.2)',
-        tension: 0.4
-      }
-    ]
-  };
+    fetch('../api/question/metric.php')
+            .then(response => response.json())
+            .then(data => {
+                const months_q = data.msg.question.map(item => item.month);
+                const counts_q = data.msg.question.map(item => parseInt(item.qty));
 
-  // Chart options
-  var options = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: 'top',
-      },
-      title: {
-        display: true,
-        text: 'Key'
-      }
-    },
-    scales: {
-      x: {
-        beginAtZero: true,
-        grid: {
-          display: true
-        }
-      },
-      y: {
-        beginAtZero: true,
-        grid: {
-          display: true
-        }
-      }
-    }
-  };
+                const months_a = data.msg.answer.map(item => item.month);
+                const counts_a = data.msg.answer.map(item => parseInt(item.qty));
 
-  // Create the line chart
-  var lineChart = new Chart(document.getElementById('lineChart'), {
-    type: 'line',
-    data: data,
-    options: options
-  });
+
+                console.log(months_q, counts_q);
+                console.log(months_a, counts_a);
+
+                const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                const result = labels.map(label => { let index =   months_q.indexOf(label) ;  return index !== -1 ? counts_q[index] : 0 });
+                console.log(result);
+
+                // Sample data for line graph
+                  var data = {
+                    labels: labels,
+                    datasets: [
+                      {
+                        label: 'Questions',
+                        data: labels.map(label => { let index =   months_q.indexOf(label) ;  return index !== -1 ? counts_q[index] : 0 }),
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        tension: 0.4
+                      },
+                      {
+                        label: 'Answers',
+                        data: labels.map(label => { let index =   months_a.indexOf(label) ;  return index !== -1 ? counts_a[index] : 0 }),
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        tension: 0.4
+                      }
+                    ]
+                  };
+
+                  // Chart options
+                  var options = {
+                    responsive: true,
+                    plugins: {
+                      legend: {
+                        position: 'top',
+                      },
+                      title: {
+                        display: true,
+                        text: 'Key'
+                      }
+                    },
+                    scales: {
+                      x: {
+                        beginAtZero: true,
+                        grid: {
+                          display: true
+                        }
+                      },
+                      y: {
+                        beginAtZero: true,
+                        grid: {
+                          display: true
+                        }
+                      }
+                    }
+                  };
+
+                  // Create the line chart
+                  var lineChart = new Chart(document.getElementById('lineChart'), {
+                    type: 'line',
+                    data: data,
+                    options: options
+                  });
+ 
+         }).catch(error => {
+                console.error('Error fetching data:', error);
+        });
+
   </script>

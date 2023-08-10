@@ -200,7 +200,7 @@ session_start();
         // initialize Tagify on the above input node reference
         for (let i of input){
             new Tagify(i,{
-                    whitelist: ["Python", "Java", "Database","Data Warehousing","Data Management", "Data Mining","Intranet Systems Development ", "Data Visualisation","SQL"],
+                    whitelist: ["Object-Oriented Programming (Java)","Software Project Engineering","Data Warehousing","Data Management", "Data Mining Techniques" ,"Intranet Systems Development ", "IT Infrastructure and Administration(Python)","Data Visualisation"],
                     dropdown: {
                         position: "input",
                         enabled : 0 // always opens dropdown when input gets focus
