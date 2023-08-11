@@ -17,17 +17,18 @@
 <!-- Include Bootstrap Icon CDN -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
+<!-- For asking question page -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
 <!-- custom CSS -->
 <link rel="stylesheet" href="../assets/css/main.css" />
 
-<link rel="shortcut icon" href="assets/img/logo.png" type="image/x-icon" />
+<link rel="shortcut icon" href="../assets/img/logo.png" type="image/x-icon" />
 
-
+<!-- Load Jquery cdn -->
 <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 
-<!-- Link Chart.js -->
+<!-- Link Chart.js for the graphic visualisation-->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <body>
 

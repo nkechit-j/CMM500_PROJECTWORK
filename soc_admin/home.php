@@ -67,7 +67,7 @@
                 const result = labels.map(label => { let index =   months_q.indexOf(label) ;  return index !== -1 ? counts_q[index] : 0 });
                 console.log(result);
 
-                // Sample data for line graph
+                // Configuration for counts of questions and answers for eac month on the line graph
                   var data = {
                     labels: labels,
                     datasets: [
@@ -116,7 +116,7 @@
                     }
                   };
 
-                  // Create the line chart
+                  // Create the line graph(visualisation)
                   var lineChart = new Chart(document.getElementById('lineChart'), {
                     type: 'line',
                     data: data,

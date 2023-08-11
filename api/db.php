@@ -261,7 +261,7 @@ public function totalAnswers(){
 class T {
     use Common;
 }
-
+// Use to access all functions in this file
 $t = new T();
 
 

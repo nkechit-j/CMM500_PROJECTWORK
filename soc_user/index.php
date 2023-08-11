@@ -11,16 +11,16 @@ session_start();
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>BrainShare</title>
-        <!--  Inclue the boostrap CSS CDN -->
+        <!--  Inclue the boostrap CSS library CDN -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-        <!-- Include Bootstrap Icon CDN -->
+        <!-- Include Bootstrap Icon library CDN -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
         <link href="https://unpkg.com/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
             
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
-        <!-- custom CSS -->
+        <!-- custom CSS  -->
         <link rel="stylesheet" href="../assets/css/main.css" />
 
         <link rel="shortcut icon" href="../assets/img/logo.png" type="image/x-icon" />
@@ -247,7 +247,7 @@ session_start();
         );
 
 
-        // Adding Comment comment_result
+        // Adding Comment/Answer comment_result
         let comment_result = $(".comment_result");
         $(document).on("submit", "form.comment_form",function(evt){
             evt.preventDefault();
@@ -344,7 +344,7 @@ session_start();
             return str.length > maxLength ? str.slice(0, maxLength) + "..." : str;
          }
 
-        // get list of all questions
+        // get list of all questions(makes call to allquestions.php and populates the queue of questions)
         let output  =$(".question__list");
         fetch('../api/question/all_questions.php').then(response => {
                 if (!response.ok) {  throw new Error('Network response was not ok');   }
@@ -384,7 +384,7 @@ session_start();
                 location.assign('?stid='+student_id.split("_")[1]+'&qid='+question_id.split("_")[1]);
             }); 
             
-            //when the seacrh bar button is  clicked search__input
+            //when the search bar button is  clicked search__input
 
             $(document).on('click','#question_adon',function(evt){
                 let seacrh  = $(".search__input").val();

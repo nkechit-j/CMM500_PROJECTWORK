@@ -49,7 +49,7 @@ class Register{
           $this->message['msg'] = "All fields are required";
        }
 
-    //  finalyy send a json response
+    //  finally send a json response
      echo json_encode($this->message) ;
 
     }

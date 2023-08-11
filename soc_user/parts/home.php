@@ -1,11 +1,11 @@
 
 <div class="row q_section">
-          <!-- this is the wuestion will be loaded -->
+          <!-- this is where the queue of question will be loaded -->
         <div class="col-md-4 col-md question__list">
             
         </div>
 
-        <!-- THis is where each question loads and its comments -->
+        <!-- This is where each question loads and its comments -->
         <div class="col-md-8 col-md text_container d-flex justify-content-center align-items-center">
 
             <div class="inner__container"> 
@@ -22,7 +22,7 @@
                                 $gt->getquestion($qid,$stid);
 
 
-                                //  Add Your own comment 
+                                //  Add Your own comment/Answer
                                 echo '<div class="container my-4 mx-2 bg-light bordered"><div class="col-md-12">
                                         <form class="comment_form"> 
                                               <div class="form-group">

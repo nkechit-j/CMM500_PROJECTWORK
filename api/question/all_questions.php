@@ -6,7 +6,7 @@ class GetAppQuestions{
 
     public function __construct(){
         $output = [];
-        $query = $this->con()->query("SELECT * FROM `question`");
+        $query = $this->con()->query("SELECT * FROM `question` ORDER BY 'createdAt' ASC ");
         if($query){
             $counter = 0;
             while($row  = $query->fetch_assoc() ){
